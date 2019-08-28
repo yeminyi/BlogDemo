@@ -1,4 +1,5 @@
 ﻿
+using BlogDemo.Infrastructure.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +14,10 @@ namespace BlogDemo.Api
         {
             services.AddMvc();
 
-            //services.AddDbContext<MyContext>(options =>
-            //{
-            //    options.UseSqlite("Data Source=BlogDemo.db");
-            //});
+            services.AddDbContext<MyContext>(options =>
+            {
+                options.UseSqlite("Data Source=BlogDemo.db");
+            });
 
             services.AddHttpsRedirection(options =>
             {
