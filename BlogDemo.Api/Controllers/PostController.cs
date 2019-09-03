@@ -13,37 +13,39 @@ namespace BlogDemo.Api.Controllers
     [Route("api/posts")]
     public class PostController : Controller
     {
-        private readonly MyContext _myContext;
+       
+        private readonly IPostRepository _postRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PostController(MyContext myContext)
+        public PostController(IPostRepository postRepository, IUnitOfWork unitOfWork)
         {
-            _myContext = myContext;
+            _postRepository = postRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var posts = await _myContext.Posts.ToListAsync();
+            var posts = await _postRepository.GetAllPostsAsync();
 
             return Ok(posts);
         }
+        [HttpPost]
+        public async Task<IActionResult> Post()
+        {
+            var newPost = new Post
+            {
+                Author = "admin",
+                Body = "1231321312312321312321321",
+                Title = "Title A",
+                LastModified = DateTime.Now
+            };
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post()
-        //{
-        //    var newPost = new Post
-        //    {
-        //        Author = "admin",
-        //        Body = "1231321312312321312321321",
-        //        Title = "Title A",
-        //        LastModified = DateTime.Now
-        //    };
+            _postRepository.AddPost(newPost);
 
-        //    _postRepository.AddPost(newPost);
+            await _unitOfWork.SaveAsync();
 
-        //    await _unitOfWork.SaveAsync();
-
-        //    return Ok();
-        //}
+            return Ok();
+        }
     }
 }
