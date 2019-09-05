@@ -36,8 +36,8 @@ namespace BlogDemo.Api.Controllers
             var newPost = new Post
             {
                 Author = "admin",
-                Body = "1231321312312321312321321",
-                Title = "Title A",
+                Body = "test123",
+                Title = "Title Test",
                 LastModified = DateTime.Now
             };
 
