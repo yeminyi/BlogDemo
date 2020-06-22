@@ -7,18 +7,30 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using BlogDemo.Api.Extensions;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace BlogDemo.Api
 {
     public class StartupDevelopment
     {
+        private static IConfiguration Configuration { get; set; }
+
+        public StartupDevelopment(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
             services.AddDbContext<MyContext>(options =>
             {
-                options.UseSqlite("Data Source=BlogDemo.db");
+                // var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
+                var connectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlite(connectionString);
             });
 
             services.AddHttpsRedirection(options =>
@@ -30,10 +42,9 @@ namespace BlogDemo.Api
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
-
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            app.UseDeveloperExceptionPage();
+            app.UseMyExceptionHandler(loggerFactory);
 
             app.UseHttpsRedirection();
 
@@ -41,3 +52,4 @@ namespace BlogDemo.Api
         }
     }
 }
+
