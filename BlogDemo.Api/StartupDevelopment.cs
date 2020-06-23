@@ -11,6 +11,9 @@ using BlogDemo.Api.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using BlogDemo.Infrastructure.Resources;
+using FluentValidation;
 
 namespace BlogDemo.Api
 {
@@ -41,6 +44,9 @@ namespace BlogDemo.Api
 
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(StartupDevelopment));
+            services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
+
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
