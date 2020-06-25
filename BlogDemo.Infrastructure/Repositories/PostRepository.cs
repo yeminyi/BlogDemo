@@ -18,11 +18,31 @@ namespace BlogDemo.Infrastructure.Repositories
             _myContext = myContext;
         }
 
-        public async Task<IEnumerable<Post>> GetAllPostsAsync()
+        public async Task<PaginatedList<Post>> GetAllPostsAsync(PostParameters postParameters)
         {
-            return await _myContext.Posts.ToListAsync();
+            var query = _myContext.Posts.AsQueryable();
+
+            if (!string.IsNullOrEmpty(postParameters.Title))
+            {
+                var title = postParameters.Title.ToLowerInvariant();
+                query = query.Where(x => x.Title.ToLowerInvariant() == title);
+            }
+
+            //query = query.ApplySort(postParameters.OrderBy, _propertyMappingContainer.Resolve<PostResource, Post>());
+
+            var count = await query.CountAsync();
+            var data = await query
+                .Skip(postParameters.PageIndex * postParameters.PageSize)
+                .Take(postParameters.PageSize)
+                .ToListAsync();
+
+            return new PaginatedList<Post>(postParameters.PageIndex, postParameters.PageSize, count, data);
         }
 
+        public async Task<Post> GetPostByIdAsync(int id)
+        {
+            return await _myContext.Posts.FindAsync(id);
+        }
         public void AddPost(Post post)
         {
             _myContext.Posts.Add(post);

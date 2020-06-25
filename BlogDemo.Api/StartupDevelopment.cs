@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BlogDemo.Api.Extensions;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using BlogDemo.Infrastructure.Resources;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace BlogDemo.Api
 {
@@ -42,10 +44,27 @@ namespace BlogDemo.Api
                 options.HttpsPort = 5001;
             });
 
+            //services.AddScoped<IPostRepository, PostRepository>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddAutoMapper(typeof(StartupDevelopment));
+            //services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
+            services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper>(factory =>
+            {
+                var actionContext = factory.GetService<IActionContextAccessor>().ActionContext;
+                return new UrlHelper(actionContext);
+            });
+
+            services.AddAutoMapper(typeof(StartupDevelopment));
+
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddAutoMapper(typeof(StartupDevelopment));
-            services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
+
+            var propertyMappingContainer = new PropertyMappingContainer();
+            propertyMappingContainer.Register<PostPropertyMapping>();
+            services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
 
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
