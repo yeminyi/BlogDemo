@@ -16,6 +16,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using BlogDemo.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace BlogDemo.Api
 {
@@ -29,7 +31,13 @@ namespace BlogDemo.Api
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(
+              options =>
+              {
+                  options.ReturnHttpNotAcceptable = true;
+
+                  options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+              });
 
             services.AddDbContext<MyContext>(options =>
             {

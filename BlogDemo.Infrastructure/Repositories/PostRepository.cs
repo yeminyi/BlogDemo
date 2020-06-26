@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlogDemo.Core.Entities;
 using BlogDemo.Core.Interfaces;
 using BlogDemo.Infrastructure.Database;
+using BlogDemo.Infrastructure.Extensions;
+using BlogDemo.Infrastructure.Resources;
+using BlogDemo.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogDemo.Infrastructure.Repositories
@@ -12,12 +16,14 @@ namespace BlogDemo.Infrastructure.Repositories
     public class PostRepository : IPostRepository
     {
         private readonly MyContext _myContext;
-
-        public PostRepository(MyContext myContext)
+        private readonly IPropertyMappingContainer _propertyMappingContainer;
+        public PostRepository(MyContext myContext,
+             IPropertyMappingContainer propertyMappingContainer)
         {
             _myContext = myContext;
+            _propertyMappingContainer = propertyMappingContainer;
         }
-
+  
         public async Task<PaginatedList<Post>> GetAllPostsAsync(PostParameters postParameters)
         {
             var query = _myContext.Posts.AsQueryable();
@@ -28,7 +34,7 @@ namespace BlogDemo.Infrastructure.Repositories
                 query = query.Where(x => x.Title.ToLowerInvariant() == title);
             }
 
-            //query = query.ApplySort(postParameters.OrderBy, _propertyMappingContainer.Resolve<PostResource, Post>());
+            query = query.ApplySort(postParameters.OrderBy, _propertyMappingContainer.Resolve<PostResource, Post>());
 
             var count = await query.CountAsync();
             var data = await query
