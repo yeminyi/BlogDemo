@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using BlogDemo.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json.Serialization;
+using System.Linq;
 
 namespace BlogDemo.Api
 {
@@ -35,9 +37,18 @@ namespace BlogDemo.Api
               options =>
               {
                   options.ReturnHttpNotAcceptable = true;
+                  // options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
 
-                  options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
-              });
+                  var outputFormatter = options.OutputFormatters.OfType<JsonOutputFormatter>().FirstOrDefault();
+                  if (outputFormatter != null)
+                  {
+                      outputFormatter.SupportedMediaTypes.Add("application/vnd.cgzl.hateoas+json");
+                  }
+              })
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
             services.AddDbContext<MyContext>(options =>
             {
@@ -73,7 +84,7 @@ namespace BlogDemo.Api
             var propertyMappingContainer = new PropertyMappingContainer();
             propertyMappingContainer.Register<PostPropertyMapping>();
             services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
-
+            services.AddTransient<ITypeHelperService, TypeHelperService>();
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
