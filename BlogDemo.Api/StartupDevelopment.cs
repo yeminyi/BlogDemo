@@ -20,6 +20,7 @@ using BlogDemo.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
+using FluentValidation.AspNetCore;
 
 namespace BlogDemo.Api
 {
@@ -38,7 +39,12 @@ namespace BlogDemo.Api
               {
                   options.ReturnHttpNotAcceptable = true;
                   // options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
-
+                  var intputFormatter = options.InputFormatters.OfType<JsonInputFormatter>().FirstOrDefault();
+                  if (intputFormatter != null)
+                  {
+                      intputFormatter.SupportedMediaTypes.Add("application/vnd.cgzl.post.create+json");
+                      intputFormatter.SupportedMediaTypes.Add("application/vnd.cgzl.post.update+json");
+                  }
                   var outputFormatter = options.OutputFormatters.OfType<JsonOutputFormatter>().FirstOrDefault();
                   if (outputFormatter != null)
                   {
@@ -48,7 +54,8 @@ namespace BlogDemo.Api
                 .AddJsonOptions(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+                })
+                .AddFluentValidation();
 
             services.AddDbContext<MyContext>(options =>
             {
@@ -67,7 +74,9 @@ namespace BlogDemo.Api
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddAutoMapper(typeof(StartupDevelopment));
             //services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
-            services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
+            services.AddTransient<IValidator<PostAddResource>, PostAddOrUpdateResourceValidator<PostAddResource>>();
+            services.AddTransient<IValidator<PostUpdateResource>, PostAddOrUpdateResourceValidator<PostUpdateResource>>();
+
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
