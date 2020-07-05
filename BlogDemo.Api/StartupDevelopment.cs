@@ -21,6 +21,9 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 using FluentValidation.AspNetCore;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace BlogDemo.Api
 {
@@ -69,7 +72,13 @@ namespace BlogDemo.Api
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
                 options.HttpsPort = 5001;
             });
-
+            services
+            .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            .AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "https://localhost:5001";
+                options.ApiName = "restapi";
+            });
             //services.AddScoped<IPostRepository, PostRepository>();
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddAutoMapper(typeof(StartupDevelopment));
@@ -94,6 +103,14 @@ namespace BlogDemo.Api
             propertyMappingContainer.Register<PostPropertyMapping>();
             services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
             services.AddTransient<ITypeHelperService, TypeHelperService>();
+            services.Configure<MvcOptions>(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
@@ -101,7 +118,10 @@ namespace BlogDemo.Api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseMvc();
+         
         }
     }
 }
