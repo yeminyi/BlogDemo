@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+
+    <button mat-button class="sidenav-toggle" (click)="toggleSidenav.emit()">
+      <mat-icon aria-label="Drawer Menu" svgIcon="baseline-menu"></mat-icon>
+    </button>
+  
+    <span>A .NET Core Blog</span>
+  
+    <span class="toolbar-spacer"></span>
+  
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon svgIcon="baseline-more_vert"></mat-icon>
+    </button>
+  
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Sign In</button>
+      <button mat-menu-item>Sign out</button>
+    </mat-menu>
+  
+  </mat-toolbar>
+  
