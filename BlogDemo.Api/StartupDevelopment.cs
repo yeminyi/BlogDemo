@@ -24,6 +24,7 @@ using FluentValidation.AspNetCore;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace BlogDemo.Api
 {
@@ -70,7 +71,7 @@ namespace BlogDemo.Api
             services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-                options.HttpsPort = 5001;
+                options.HttpsPort = 6001;
             });
             services
             .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
@@ -103,8 +104,17 @@ namespace BlogDemo.Api
             propertyMappingContainer.Register<PostPropertyMapping>();
             services.AddSingleton<IPropertyMappingContainer>(propertyMappingContainer);
             services.AddTransient<ITypeHelperService, TypeHelperService>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularDevOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                        .WithExposedHeaders("X-Pagination")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
             services.Configure<MvcOptions>(options =>
             {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAngularDevOrigin"));
                 var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
@@ -115,6 +125,8 @@ namespace BlogDemo.Api
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             app.UseMyExceptionHandler(loggerFactory);
+            
+            app.UseCors("AllowAngularDevOrigin");
 
             app.UseHttpsRedirection();
 

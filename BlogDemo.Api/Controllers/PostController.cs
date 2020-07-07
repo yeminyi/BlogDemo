@@ -9,6 +9,7 @@ using BlogDemo.Core.Interfaces;
 using BlogDemo.Infrastructure.Extensions;
 using BlogDemo.Infrastructure.Resources;
 using BlogDemo.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace BlogDemo.Api.Controllers
 {
+    [AllowAnonymous]
     [Route("api/posts")]
     public class PostController : Controller
     {
