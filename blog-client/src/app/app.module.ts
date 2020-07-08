@@ -5,9 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { OpenIdConnectService } from "./shared/oidc/open-id-connect.service";
+import { SigninOidcComponent } from "./shared/oidc/signin-oidc/signin-oidc.component";
+import { RedirectSilentRenewComponent } from "./shared/oidc/redirect-silent-renew/redirect-silent-renew.component";
+import { RequireAuthenticatedUserRouteGuard } from "./shared/oidc/require-authenticated-user-route.guard";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SigninOidcComponent,
+    RedirectSilentRenewComponent
   ],
   imports: [
     BrowserModule,
@@ -15,7 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    OpenIdConnectService,
+    RequireAuthenticatedUserRouteGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
