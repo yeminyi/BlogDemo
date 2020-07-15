@@ -18,7 +18,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace BlogDemo.Api.Controllers
 {
-    [AllowAnonymous]
+ 
     [Route("api/posts")]
     public class PostController : Controller
     {
