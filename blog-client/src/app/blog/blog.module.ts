@@ -9,6 +9,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PostService } from './services/post.service';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { AuthorizationHeaderInterceptor } from '../shared/oidc/authorization-header-interceptor.interceptor';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { AuthorizationHeaderInterceptor } from '../shared/oidc/authorization-hea
     BlogAppComponent,
     SidenavComponent,
     ToolbarComponent,
-    PostListComponent
+    PostListComponent,
+    PostCardComponent
   ],
   providers: [
     PostService,
