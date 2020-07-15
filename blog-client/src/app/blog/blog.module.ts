@@ -10,23 +10,32 @@ import { PostService } from './services/post.service';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { AuthorizationHeaderInterceptor } from '../shared/oidc/authorization-header-interceptor.interceptor';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { WritePostComponent } from './components/write-post/write-post.component';
+import { TinymceService } from './services/tinymce.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   imports: [
     CommonModule,
     BlogRoutingModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    EditorModule
   ],
   declarations: [
     BlogAppComponent,
     SidenavComponent,
     ToolbarComponent,
     PostListComponent,
-    PostCardComponent
+    PostCardComponent,
+    WritePostComponent
   ],
   providers: [
     PostService,
+    TinymceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationHeaderInterceptor,

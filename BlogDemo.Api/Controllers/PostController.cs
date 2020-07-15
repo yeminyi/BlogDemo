@@ -48,7 +48,7 @@ namespace BlogDemo.Api.Controllers
             _typeHelperService = typeHelperService;
             _propertyMappingContainer = propertyMappingContainer;
         }
-
+        [AllowAnonymous]
         [HttpGet(Name = "GetPosts")]
         [RequestHeaderMatchingMediaType("Accept", new[] { "application/vnd.cgzl.hateoas+json" })]
         public async Task<IActionResult> GetHateoas(PostParameters postParameters)
@@ -95,7 +95,7 @@ namespace BlogDemo.Api.Controllers
 
             return Ok(result);
         }
-
+        [AllowAnonymous]
         [HttpGet(Name = "GetPosts")]
         [RequestHeaderMatchingMediaType("Accept", new[] { "application/json" })]
         public async Task<IActionResult> Get(PostParameters postParameters)
@@ -139,7 +139,7 @@ namespace BlogDemo.Api.Controllers
 
             return Ok(postResources.ToDynamicIEnumerable(postParameters.Fields));
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetPost")]
         public async Task<IActionResult> Get(int id, string fields = null)
         {
