@@ -26,49 +26,49 @@ namespace BlogDemo.Infrastructure.Database
                             new Post{
                                 Title = "Post Title 1",
                                 Body = "Post Body 1",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 2",
                                 Body = "Post Body 2",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 3",
                                 Body = "Post Body 3",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 4",
                                 Body = "Post Body 4",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 5",
                                 Body = "Post Body 5",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 6",
                                 Body = "Post Body 6",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 7",
                                 Body = "Post Body 7",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             },
                             new Post{
                                 Title = "Post Title 8",
                                 Body = "Post Body 8",
-                                Author = "Dave",
+                                Author = "Amy",
                                 LastModified = DateTime.Now
                             }
                         }

@@ -86,7 +86,7 @@ namespace BlogDemo.Api
             //services.AddTransient<IValidator<PostResource>, PostResourceValidator>();
             services.AddTransient<IValidator<PostAddResource>, PostAddOrUpdateResourceValidator<PostAddResource>>();
             services.AddTransient<IValidator<PostUpdateResource>, PostAddOrUpdateResourceValidator<PostUpdateResource>>();
-
+            services.AddTransient<IValidator<PostImageResource>, PostImageResourceValidator>();
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(factory =>
@@ -98,6 +98,7 @@ namespace BlogDemo.Api
             services.AddAutoMapper(typeof(StartupDevelopment));
 
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostImageRepository, PostImageRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var propertyMappingContainer = new PropertyMappingContainer();
@@ -129,6 +130,8 @@ namespace BlogDemo.Api
             app.UseCors("AllowAngularDevOrigin");
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

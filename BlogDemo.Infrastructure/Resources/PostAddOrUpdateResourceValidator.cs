@@ -11,7 +11,7 @@ namespace BlogDemo.Infrastructure.Resources
                 .WithName("Title")
                 .WithMessage("required|The {PropertyName} must input")
                 .MaximumLength(50)
-                .WithMessage("maxlength|{PropertyName}max length is {MaxLength}");
+                .WithMessage("maxlength|{PropertyName} max length is {MaxLength}");
 
             RuleFor(x => x.Body)
                 .NotNull()

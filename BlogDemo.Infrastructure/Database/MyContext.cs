@@ -17,8 +17,10 @@ namespace BlogDemo.Infrastructure.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new PostImageConfiguration());
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<PostImage> PostImages { get; set; }
     }
 }
