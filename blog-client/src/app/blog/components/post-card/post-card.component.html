@@ -3,7 +3,7 @@
       <div mat-card-avatar>
         <img class="avatar" [src]="'/assets/default-user.png'">
       </div>
-      <mat-card-title>
+      <mat-card-title [routerLink]="['/blog/post-detail', post.id]">
         <b>{{post.title}}</b>
       </mat-card-title>
       <mat-card-subtitle>{{post.updateTime | date: 'medium'}} by {{post.author}}</mat-card-subtitle>

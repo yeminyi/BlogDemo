@@ -20,6 +20,7 @@ export class PostListComponent implements OnInit {
     private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {
+    this.posts = [];
     this.getPosts();
   }
 
@@ -32,7 +33,7 @@ export class PostListComponent implements OnInit {
     this.postService.getPagedPosts(this.postParameter).subscribe(resp => {
       this.pageMeta = JSON.parse(resp.headers.get('X-Pagination')) as PageMeta;
       const result = {...resp.body} as ResultWithLinks<Post>;
-      this.posts = result.value;
+      this.posts = this.posts.concat(result.value);
     });
   }
 

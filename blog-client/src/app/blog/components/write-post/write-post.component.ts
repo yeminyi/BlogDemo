@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { TinymceService } from '../../services/tinymce.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ValidationErrorHandler } from '../../../shared/validation-error-handler';
+
 @Component({
   selector: 'app-write-post',
   templateUrl: './write-post.component.html',
   styleUrls: ['./write-post.component.scss']
 })
 export class WritePostComponent implements OnInit {
-  
+
   editorSettings;
+
   postForm: FormGroup;
+
   constructor(
     private router: Router,
     private postService: PostService,
@@ -38,7 +42,7 @@ export class WritePostComponent implements OnInit {
         },
         validationResult => {
           this.snackBar.open('There are validation errors!', 'Close', { duration: 3000 });
-          // ValidationErrorHandler.handleFormValidationErrors(this.postForm, validationResult);
+          ValidationErrorHandler.handleFormValidationErrors(this.postForm, validationResult);
         });
     }
   }

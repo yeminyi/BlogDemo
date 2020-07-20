@@ -1,1 +1,16 @@
-<p>post-detail works!</p>
+<mat-spinner *ngIf="!post"></mat-spinner>
+
+<div *ngIf="post">
+
+  <h1 class="mat-display-1">{{post.title}}</h1>
+
+  <section>
+    <div class="mat-body-1 post-body" [innerHTML]="post.body | safeHtml"></div>
+  </section>
+
+  <div>
+    <span class="mat-subheading-2 author">Posted @ {{post.author}} By {{post.lastModified | date: 'medium'}}</span>
+    <a mat-button [routerLink]="['/blog/edit-post', post.id]" color="primary" *ngIf='openIdConnectService.userAvailable'>Edit</a>
+  </div>
+  
+</div>
