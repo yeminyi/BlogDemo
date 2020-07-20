@@ -14,6 +14,9 @@ import { WritePostComponent } from './components/write-post/write-post.component
 import { TinymceService } from './services/tinymce.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { PostTableComponent } from './components/post-table/post-table.component';
 
 @NgModule({
   imports: [
@@ -31,7 +34,10 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ToolbarComponent,
     PostListComponent,
     PostCardComponent,
-    WritePostComponent
+    WritePostComponent,
+    EditPostComponent,
+    PostDetailComponent,
+    PostTableComponent
   ],
   providers: [
     PostService,
