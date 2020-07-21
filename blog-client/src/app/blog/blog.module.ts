@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { BlogRoutingModule } from './blog-routing.module';
 import { MaterialModule } from '../shared/material/material.module';
 import { BlogAppComponent } from './blog-app.component';
@@ -16,6 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { SafeHtmlPipe } from '../shared/safe-html.pipe';
+import { EnsureAcceptHeaderInterceptor } from '../shared/ensure-accept-header.interceptor';
+import { HandleHttpErrorInterceptor } from '../shared/handle-http-error-interceptor';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostTableComponent } from './components/post-table/post-table.component';
 
 @NgModule({
@@ -26,7 +31,8 @@ import { PostTableComponent } from './components/post-table/post-table.component
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    InfiniteScrollModule
   ],
   declarations: [
     BlogAppComponent,
@@ -37,6 +43,7 @@ import { PostTableComponent } from './components/post-table/post-table.component
     WritePostComponent,
     EditPostComponent,
     PostDetailComponent,
+    SafeHtmlPipe,
     PostTableComponent
   ],
   providers: [
