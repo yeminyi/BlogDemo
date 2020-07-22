@@ -1,0 +1,23 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    overflow: auto;
+  }
+  
+  .table-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .hidden-xs-column {
+    @media (max-width: 720px) {
+      display: none;
+    }
+  }
+  

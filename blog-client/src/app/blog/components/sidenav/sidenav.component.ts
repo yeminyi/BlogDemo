@@ -16,6 +16,7 @@ export class SidenavComponent implements OnInit {
     private router: Router,
     zone: NgZone) {
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)));
+    // this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
   }
 
   @ViewChild(MatDrawer) drawer: MatDrawer;

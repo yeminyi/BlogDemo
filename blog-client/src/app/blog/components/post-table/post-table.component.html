@@ -1,1 +1,37 @@
-<p>post-table works!</p>
+<div class="table-container mat-elevation-z8">
+    <div class="table-header">
+      <mat-form-field>
+        <input matInput (keyup)="searchKeyUp.next($event)" [(ngModel)]="postParameter.title" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  
+    <table mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let p"> {{p.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let p"> {{p.title}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> Author </th>
+        <td mat-cell *matCellDef="let p" class="hidden-xs-column"> {{p.author}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="lastModified">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> Last Modified </th>
+        <td mat-cell *matCellDef="let p" class="hidden-xs-column"> {{p.lastModified}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [length]="pageMeta.totalItemsCount" [pageIndex]="pageMeta.pageIndex" [pageSize]="pageMeta.pageSize" [pageSizeOptions]="[5, 10, 20]" 
+      [showFirstLastButtons]="true" (page)="onPaging($event)" *ngIf="pageMeta">
+    </mat-paginator>
+  </div>
+  

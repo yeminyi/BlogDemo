@@ -53,6 +53,16 @@ import { PostTableComponent } from './components/post-table/post-table.component
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationHeaderInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: EnsureAcceptHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HandleHttpErrorInterceptor,
+      multi: true,
     }
   ]
 })

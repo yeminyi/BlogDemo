@@ -25,16 +25,16 @@ export class PostListComponent implements OnInit {
   }
 
   getPosts() {
-    
-    //  this.postService.getPagedPosts(this.postParameter).subscribe(resp => {
-    //     console.log(resp);
-        
-    // });
     this.postService.getPagedPosts(this.postParameter).subscribe(resp => {
       this.pageMeta = JSON.parse(resp.headers.get('X-Pagination')) as PageMeta;
       const result = {...resp.body} as ResultWithLinks<Post>;
       this.posts = this.posts.concat(result.value);
     });
   }
-
+  onScroll() {
+    this.postParameter.pageIndex++;
+    if (this.postParameter.pageIndex < this.pageMeta.pageCount) {
+      this.getPosts();
+    }
+  }
 }

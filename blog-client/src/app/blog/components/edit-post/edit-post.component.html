@@ -1,4 +1,4 @@
-<div *ngIf="post">
+<div *ngIf="post" >
     <form class="post-editor-form" [formGroup]="postForm" (ngSubmit)="save()">
       <mat-form-field class="post-editor-title">
         <input matInput placeholder="Title" formControlName="title">
