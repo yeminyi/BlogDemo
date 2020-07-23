@@ -5,6 +5,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 using IdentityServer4;
+using IdentityModel;
 
 namespace BlogIdp
 {
@@ -23,9 +24,13 @@ namespace BlogIdp
         public static IEnumerable<ApiResource> GetApis()
         {
             return new ApiResource[]
-            {
-                new ApiResource("restapi", "My RESTful API")
-            };
+  {
+                new ApiResource("restapi", "My RESTful API", new List<string>{
+                    "name",
+                    "gender",
+                    JwtClaimTypes.PreferredUserName,
+                    JwtClaimTypes.Picture})
+  };
         }
 
         public static IEnumerable<Client> GetClients()

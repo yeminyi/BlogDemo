@@ -1,16 +1,17 @@
 const PROXY_CONFIG = [
     {
         context: [
-            "/api"
+            "/api",
+            "/uploads"
         ],
-        target: "http://localhost:6000",
+        target: "https://localhost:6001",
         secure: false
     },
     {
         context: [
-            "/uploads"
+            "/avatars"
         ],
-        target: "https://localhost:6001",
+        target: "https://localhost:5001",
         secure: false
     }
 ];
