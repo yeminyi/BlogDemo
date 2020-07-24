@@ -41,6 +41,10 @@ export class PostService extends BaseService {
     return this.http.post<Post>(`${this.apiUrlBase}/posts`, post, httpOptions);
   }
 
+  deletePost(id: number | string): Observable<any> {
+    return this.http.delete(`${this.apiUrlBase}/posts/${id}`);
+  }
+  
   partiallyUpdatePost(id: number | string, patchDocument: Operation[]): Observable<any> {
     return this.http.patch(`${this.apiUrlBase}/posts/${id}`, patchDocument,
       {

@@ -22,6 +22,7 @@ import { EnsureAcceptHeaderInterceptor } from '../shared/ensure-accept-header.in
 import { HandleHttpErrorInterceptor } from '../shared/handle-http-error-interceptor';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostTableComponent } from './components/post-table/post-table.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { PostTableComponent } from './components/post-table/post-table.component
     EditPostComponent,
     PostDetailComponent,
     SafeHtmlPipe,
-    PostTableComponent
+    PostTableComponent,
+    ConfirmDialogComponent
   ],
   providers: [
     PostService,

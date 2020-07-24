@@ -11,6 +11,7 @@
   <div>
     <span class="mat-subheading-2 author">Posted @ {{post.author}} By {{post.lastModified | date: 'medium'}}</span>
     <a mat-button [routerLink]="['/blog/edit-post', post.id]" color="primary" *ngIf='openIdConnectService.userAvailable'>Edit</a>
+    <a mat-button color="primary"   (click)="openDeleteDialog(post)" *ngIf='openIdConnectService.userAvailable'>Delete</a>
   </div>
   
 </div>
