@@ -7,6 +7,8 @@ import { Post } from '../../models/post';
 import { OpenIdConnectService } from '../../../shared/oidc/open-id-connect.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -17,14 +19,40 @@ export class PostListComponent implements OnInit {
   posts: Post[];
   pageMeta: PageMeta;
   postParameter = new PostParameters({ orderBy: 'id desc', pageSize: 10, pageIndex: 0 });
-
+  searchKeyUp = new Subject<string>();
   constructor(private postService: PostService,
     private dialog: MatDialog,
-    private openIdConnectService: OpenIdConnectService) { }
-
+    private openIdConnectService: OpenIdConnectService) { 
+      const subscription = this.searchKeyUp.pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      ).subscribe(() => {
+        this.applyFilter(this.postParameter.title);
+      });
+    }
   ngOnInit() {
     this.posts = [];
     this.getPosts();
+  }
+
+  applyFilter(filterValue: string) {
+    console.log(filterValue);
+    
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.postParameter.title = filterValue;
+    this.getPostswithFilter();
+  }
+
+  getPostswithFilter() {
+    this.postService.getPagedPosts(this.postParameter).subscribe(resp => {
+      this.pageMeta = JSON.parse(resp.headers.get('X-Pagination')) as PageMeta;
+      const result = {...resp.body} as ResultWithLinks<Post>;
+      this.posts = result.value;
+      console.log(this.posts);
+      console.log(this.postParameter.title);
+      
+    });
   }
 
   getPosts() {
@@ -34,6 +62,7 @@ export class PostListComponent implements OnInit {
       this.posts = this.posts.concat(result.value);
     });
   }
+
   onScroll() {
     this.postParameter.pageIndex++;
     if (this.postParameter.pageIndex < this.pageMeta.pageCount) {

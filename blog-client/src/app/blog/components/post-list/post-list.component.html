@@ -1,6 +1,11 @@
 <div *ngIf="!pageMeta">
   <mat-spinner></mat-spinner>
 </div>
+<div>
+  <mat-form-field  class="table-header">
+    <input matInput (keyup)="searchKeyUp.next($event)" [(ngModel)]="postParameter.title" placeholder="Filter">
+  </mat-form-field>
+</div>
 <div *ngIf="pageMeta" class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
 [infiniteScrollContainer]="'.mat-drawer-content'" [fromRoot]="true">
   <button mat-mini-fab color="warn" class="add-fab" [routerLink]="'/blog/write-post'" *ngIf='openIdConnectService.userAvailable'>

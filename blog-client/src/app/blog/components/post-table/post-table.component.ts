@@ -57,6 +57,8 @@ export class PostTableComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    console.log('filter');
+    
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.postParameter.title = filterValue;
