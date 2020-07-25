@@ -15,7 +15,7 @@
       <button mat-button *ngIf='openIdConnectService.userAvailable' [routerLink]="['/blog/edit-post', post.id]" >
         EDIT
       </button>
-      <button mat-button *ngIf='openIdConnectService.userAvailable'  (click)="openDeleteDialog(post)">
+      <button mat-button *ngIf='openIdConnectService.userAvailable' (click)="openDeleteDialog($event)">
         DELETE
       </button>
     </mat-card-actions>

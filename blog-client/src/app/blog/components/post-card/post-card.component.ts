@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Post } from '../../models/post';
 import { OpenIdConnectService } from '../../../shared/oidc/open-id-connect.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class PostCardComponent implements OnInit {
   @Input() post: Post;
+  @Output() launchDeleteDailog = new EventEmitter<void>();
   constructor(
     private postService: PostService,
     private router: Router,
@@ -21,32 +22,9 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDeleteDialog(post: Post) {
-    const confirm = {
-      title: 'Confirm to delete:',
-      content:'Do you confirm to delete \''+post.title+'\'',
-      confirmAction: 'Delete',
-    };
-    let deleteId =post.id;
-    console.log(deleteId);
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { dialog: confirm }
-    });
-
-    dialogRef
-      .afterClosed()
-      .subscribe(
-        post => {
-          if (post) {
-              this.postService.deletePost(deleteId).subscribe(
-              post => {
-                // this.router.navigate(['/blog/post-list/']);
-                // const deletedContrat = this.post.find(x => x.id === post.id);
-                // this.post.splice(this.post.indexOf(deletedContrat), 1);
-              });
-          }
-        }
-      );
+  openDeleteDialog(ev: Event) {
+    ev.preventDefault();
+    this.launchDeleteDailog.emit();
   }
   
 }

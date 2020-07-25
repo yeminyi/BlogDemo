@@ -5,6 +5,8 @@ import { PageMeta } from '../../../shared/models/page-meta';
 import { ResultWithLinks } from '../../../shared/models/result-with-links';
 import { Post } from '../../models/post';
 import { OpenIdConnectService } from '../../../shared/oidc/open-id-connect.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -17,6 +19,7 @@ export class PostListComponent implements OnInit {
   postParameter = new PostParameters({ orderBy: 'id desc', pageSize: 10, pageIndex: 0 });
 
   constructor(private postService: PostService,
+    private dialog: MatDialog,
     private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {
@@ -37,4 +40,31 @@ export class PostListComponent implements OnInit {
       this.getPosts();
     }
   }
+  openDeleteDialog(post: Post) {
+    const confirm = {
+      title: 'Confirm to delete:',
+      content:'Do you confirm to delete \''+post.title+'\'',
+      confirmAction: 'Delete',
+    };
+    let deleteId =post.id;
+    console.log(deleteId);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { dialog: confirm }
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe(
+        post => {
+          if (post) {
+              this.postService.deletePost(deleteId).subscribe(
+              post => {
+                const deletedContrat = this.posts.find(x => x.id === deleteId);           
+                this.posts.splice(this.posts.indexOf(deletedContrat), 1);
+              });
+          }
+        }
+      );
+  }
+
 }

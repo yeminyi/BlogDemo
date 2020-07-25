@@ -7,7 +7,7 @@
     <mat-icon aria-label="Add Post" svgIcon="baseline-add"></mat-icon>
   </button>
   <ng-container *ngFor="let item of posts">
-    <app-post-card [post]="item"></app-post-card>
+    <app-post-card [post]="item"  (launchDeleteDailog)="openDeleteDialog(item)"></app-post-card>
   </ng-container>
 
 </div>
