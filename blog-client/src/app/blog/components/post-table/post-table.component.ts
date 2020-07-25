@@ -8,6 +8,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PageMeta } from '../../../shared/models/page-meta';
 import { ResultWithLinks } from '../../../shared/models/result-with-links';
 import { PostParameters } from '../../models/post-parameters';
+import { OpenIdConnectService } from '../../../shared/oidc/open-id-connect.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-table',
@@ -19,7 +23,7 @@ export class PostTableComponent implements OnInit {
   pageMeta: PageMeta;
   postParameter = new PostParameters({ orderBy: 'id desc', pageSize: 10, pageIndex: 0 });
 
-  displayedColumns: string[] = ['id', 'title', 'author', 'lastModified'];
+  displayedColumns: string[] = ['id', 'title', 'author', 'lastModified','actions'];
   dataSource: Post[];
   searchKeyUp = new Subject<string>();
 
@@ -28,7 +32,10 @@ export class PostTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private postService: PostService) {
+    private postService: PostService,
+    private router: Router,
+    public openIdConnectService: OpenIdConnectService,
+    private dialog: MatDialog) {
     const subscription = this.searchKeyUp.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -71,5 +78,31 @@ export class PostTableComponent implements OnInit {
     this.postParameter.pageIndex = pageEvent.pageIndex;
     this.postParameter.pageSize = pageEvent.pageSize;
     this.load();
+  }
+
+  openDeleteDialog(post: Post) {
+    const confirm = {
+      title: 'Confirm to delete:',
+      content:'Do you confirm to delete \''+post.title+'\'',
+      confirmAction: 'Delete',
+    };
+    let deleteId =post.id;
+    console.log(deleteId);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { dialog: confirm }
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe(
+        post => {
+          if (post) {
+              this.postService.deletePost(deleteId).subscribe(
+              post => {
+                this.load();
+              });
+          }
+        }
+      );
   }
 }

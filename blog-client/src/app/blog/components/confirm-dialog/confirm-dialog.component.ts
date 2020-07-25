@@ -14,7 +14,7 @@ export interface ConfirmDialog {
     <div mat-dialog-content>{{dialog.content}}</div>
     <div mat-dialog-actions>
       <button mat-raised-button color="primary" (click)="handleAction(true)">{{dialog.confirmAction}}</button>
-      <button mat-raised-button mat-dialog-close type="button" (click)="handleAction(false)">关闭</button>
+      <button mat-raised-button mat-dialog-close type="button" (click)="handleAction(false)">Close</button>
     </div>
   `,
   styles: [``],

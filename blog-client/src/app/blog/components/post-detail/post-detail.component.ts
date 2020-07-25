@@ -35,8 +35,8 @@ export class PostDetailComponent implements OnInit {
   openDeleteDialog(post: Post) {
     const confirm = {
       title: 'Confirm to delete:',
-      content:'Do you confirm to delete '+post.title,
-      confirmAction: 'Confirm to delete',
+      content:'Do you confirm to delete \''+post.title+'\'',
+      confirmAction: 'Delete',
     };
     let deleteId =post.id;
     console.log(deleteId);
@@ -54,8 +54,6 @@ export class PostDetailComponent implements OnInit {
                 this.router.navigate(['/blog/post-list/']);
               });
           }
-      
-
         }
       );
   }
