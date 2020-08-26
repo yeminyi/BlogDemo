@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/96926e1f-f183-4550-ad72-b8108c622f81/resourceGroups/BlogDemoApi/providers/Microsoft.Web/sites/BlogDemoClient",
+    "appService.deploySubpath": "."
+}

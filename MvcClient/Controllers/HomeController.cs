@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MvcClient.Models;
 using Newtonsoft.Json;
@@ -23,6 +24,7 @@ namespace MvcClient.Controllers
             return View();
         }
 
+
         public async Task<IActionResult> About()
         {
             var idToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
@@ -36,7 +38,8 @@ namespace MvcClient.Controllers
         {
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:6001")
+                //BaseAddress = new Uri("https://localhost:6001")
+                 BaseAddress = new Uri("https://blogdemoapi.azurewebsites.net")
             };
             httpClient.DefaultRequestHeaders.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(

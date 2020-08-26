@@ -4,7 +4,7 @@ const PROXY_CONFIG = [
             "/api",
             "/uploads"
         ],
-        target: "https://localhost:6001",
+        target: "https://blogdemoapi.azurewebsites.net",
         secure: false
     },
     {

@@ -52,17 +52,10 @@ namespace BlogIdp
             })
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryClients(Config.GetClients(Configuration))
                 .AddAspNetIdentity<ApplicationUser>();
 
-            if (Environment.IsDevelopment())
-            {
-                builder.AddDeveloperSigningCredential();
-            }
-            else
-            {
-                throw new Exception("need to configure key material");
-            }
+            builder.AddDeveloperSigningCredential();
 
             services.AddAuthentication()
                 .AddGoogle(options =>
@@ -89,7 +82,7 @@ namespace BlogIdp
             {
                 options.AddPolicy("AngularDev", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")
+                    policy.WithOrigins(Configuration["ClientAddress"])
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });

@@ -6,6 +6,7 @@ using IdentityServer4.Models;
 using System.Collections.Generic;
 using IdentityServer4;
 using IdentityModel;
+using Microsoft.Extensions.Configuration;
 
 namespace BlogIdp
 {
@@ -33,7 +34,7 @@ namespace BlogIdp
   };
         }
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
         {
             return new[]
             {
@@ -45,10 +46,10 @@ namespace BlogIdp
 
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
-                    RedirectUris = { "https://localhost:7001/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:7001/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
+ 
+                    RedirectUris = { $"{configuration["MVCAddress"]}/signin-oidc" },
+                    FrontChannelLogoutUri = $"{configuration["MVCAddress"]}/signout-oidc",
+                    PostLogoutRedirectUris = { $"{configuration["MVCAddress"]}/signout-callback-oidc" },
 
                     AllowOfflineAccess = true, // offline_access
                     AllowedScopes =
@@ -65,21 +66,21 @@ namespace BlogIdp
                 {
                     ClientId = "blog-client",
                     ClientName = "Blog Client",
-                    ClientUri = "http://localhost:4200",
-
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    //ClientUri = "http://localhost:4200",
+                    ClientUri =configuration["ClientAddress"],
+            AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     AccessTokenLifetime = 180,
-
+                   
                     RedirectUris =
                     {
-                        "http://localhost:4200/signin-oidc",
-                        "http://localhost:4200/redirect-silentrenew"
+                        $"{configuration["ClientAddress"]}/signin-oidc",
+                         $"{configuration["ClientAddress"]}/redirect-silentrenew"
                     },
 
-                    PostLogoutRedirectUris = { "http://localhost:4200/" },
-                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    PostLogoutRedirectUris = { configuration["ClientAddress"] },
+                    AllowedCorsOrigins = { configuration["ClientAddress"] },
 
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,

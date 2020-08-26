@@ -1,0 +1,7 @@
+2020-08-26 15:17:03.916 +10:00 [INF] Entity Framework Core 2.1.14-servicing-32113 initialized 'MyContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: None
+2020-08-26 15:17:04.567 +10:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA foreign_keys=ON;
+2020-08-26 15:17:04.605 +10:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Author", "p"."Body", "p"."LastModified", "p"."Remark", "p"."Title"
+FROM "Posts" AS "p"
+2020-08-26 15:17:04.701 +10:00 [INF] User profile is available. Using 'C:\Users\yemin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.

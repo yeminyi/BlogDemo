@@ -77,7 +77,8 @@ namespace BlogDemo.Api
             .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
             .AddIdentityServerAuthentication(options =>
             {
-                options.Authority = "https://localhost:5001";
+                //options.Authority = "https://localhost:5001";
+                options.Authority = Configuration["IdentityServerAddress"];
                 options.ApiName = "restapi";
             });
             //services.AddScoped<IPostRepository, PostRepository>();
@@ -108,7 +109,7 @@ namespace BlogDemo.Api
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngularDevOrigin",
-                    builder => builder.WithOrigins("http://localhost:4200")
+                    builder => builder.WithOrigins(Configuration["ClientAddress"])
                         .WithExposedHeaders("X-Pagination")
                         .AllowAnyHeader()
                         .AllowAnyMethod());

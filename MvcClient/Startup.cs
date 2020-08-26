@@ -51,7 +51,8 @@ namespace MvcClient
                 .AddOpenIdConnect("oidc", options =>
                 {
                     options.SignInScheme = "Cookies";
-                    options.Authority = "https://localhost:5001";
+                    options.Authority=Configuration["IdentityServerAddress"];
+                    //options.Authority = "https://localhost:5001";
                     options.RequireHttpsMetadata = true;
                     options.ClientId = "mvcclient";
                     options.ResponseType = "code id_token";
