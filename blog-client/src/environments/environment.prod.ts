@@ -4,15 +4,17 @@
 
 export const environment = {
   production: true,
-  apiUrlBase: 'https://blogdemoapi.azurewebsites.net/api', openIdConnectSettings: {
-  authority: 'https://blogauthserver.azurewebsites.net/',
-  client_id: 'blog-client',
-  redirect_uri: 'https://blogdemoclient.azurewebsites.net/signin-oidc',
-  scope: 'openid profile email restapi',
-  response_type: 'id_token token',
-  post_logout_redirect_uri: 'https://blogdemoclient.azurewebsites.net/',
-  automaticSilentRenew: true,
-  silent_redirect_uri: 'https://blogdemoclient.azurewebsites.net/redirect-silentrenew'
+  apiUrlBase: 'https://blogdemoapi.azurewebsites.net/api',
+  urlBase: 'https://blogdemoapi.azurewebsites.net',
+  openIdConnectSettings: {
+    authority: 'https://blogauthserver.azurewebsites.net/',
+    client_id: 'blog-client',
+    redirect_uri: 'https://blogdemoclient.azurewebsites.net/signin-oidc',
+    scope: 'openid profile email restapi',
+    response_type: 'id_token token',
+    post_logout_redirect_uri: 'https://blogdemoclient.azurewebsites.net/',
+    automaticSilentRenew: true,
+    silent_redirect_uri: 'https://blogdemoclient.azurewebsites.net/redirect-silentrenew'
 }
 };
 /*

@@ -20,7 +20,7 @@ export class TinymceService {
       images_upload_url: `${environment.apiUrlBase}/postimages`,
       images_upload_credentials: false,
       automatic_uploads: true,
-      imagetools_cors_hosts: ['https://blogdemoapi.azurewebsites.net'],
+      imagetools_cors_hosts: [`${environment.urlBase}`],
       imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
       paste_data_images: true,
       paste_postprocess: function (plugin, args) {
