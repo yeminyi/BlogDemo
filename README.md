@@ -1,5 +1,5 @@
 
-# Multi-User Blog System
+# Blog System
 
   
 
