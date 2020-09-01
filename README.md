@@ -8,7 +8,11 @@ Demo runs here : [https://blogdemoclient.azurewebsites.net/](https://blogdemocli
 -  ASP.NET Core 2.1 Web API
 -  Entity Framework Core
 -  Sqlite
--  Identity Server 4 
+-  Identity Server 4 (oauth/oidc based)
+-  FluentValidation
+-  Unit of Work + Repository DIP The Dependency Inversion Principle (DIP)
+-  Serilog for the ExceptionHandler
+-  restful API (using HATEOAS = Hypermedia As The Engine Of Application State,Media Type Vendor-specific media type)
 -  Angular 6 
 -  Angular Material
 
