@@ -5,20 +5,16 @@ Demo runs here : [https://blogdemoclient.azurewebsites.net/](https://blogdemocli
 
 ## Tech stack
 
--  ASP.NET Core 2.1 Web API
--  Entity Framework Core
--  Sqlite
--  Identity Server 4 (oauth/oidc based)
--  FluentValidation
--  Unit of Work + Repository DIP The Dependency Inversion Principle (DIP)
--  Serilog for the ExceptionHandler
--  restful API (using HATEOAS = Hypermedia As The Engine Of Application State,Media Type Vendor-specific media type)
--  Angular 6 
--  Angular Material
+- ASP.NET Core 2.1 Web API
+- Entity Framework Core + Sqlite
+- Identity Server 4 (oauth/oidc based)
+- FluentValidation
+- Unit of Work + Repository DIP The Dependency Inversion Principle (DIP)
+- Using Serilog for the Global Error Handling and Logging
+- restful API (using HATEOAS = Hypermedia As The Engine Of Application State,Media Type Vendor-specific media type)
+- Angular 6 + Angular Material
 
 ## Getting started
-
-  
 
 1. fork the project
 
