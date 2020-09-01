@@ -1,15 +1,13 @@
 
 # Blog System
 
-  
-
 Demo runs here : [https://blogdemoclient.azurewebsites.net/](https://blogdemoclient.azurewebsites.net/)
-
 
 ## Tech stack
 
-  
 -  ASP.NET Core 2.1 Web API
+-  Entity Framework Core
+-  Sqlite
 -  Identity Server 4 
 -  Angular 6 
 -  Angular Material
