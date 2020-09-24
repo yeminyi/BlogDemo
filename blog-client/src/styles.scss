@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.navbar {
+    padding-bottom: 18px;
+  }
+  
+  #mainNav .navbar-nav>li.nav-item>a {
+    margin-top: 12px;
+  }

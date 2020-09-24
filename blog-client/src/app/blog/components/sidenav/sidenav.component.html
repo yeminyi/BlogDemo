@@ -1,17 +1,17 @@
 <mat-drawer-container class="app-sidenav-container" autosize>
 
-  <mat-drawer #drawer class="app-sidenav mat-elevation-z10" [mode]="isScreenSmall() ? 'over' : 'side'" [opened]="!isScreenSmall()">
+  <mat-drawer #drawer class="app-sidenav mat-elevation-z10" [mode]="'over'" >
 
-    <mat-toolbar color="primary">
+    <mat-toolbar color="white">
       Blog Demo
     </mat-toolbar>
 
     <mat-nav-list>
-      <mat-list-item role="listitem" routerLink="/blog/post-list">Post List</mat-list-item>
+      <mat-list-item role="listitem" routerLink="/blog/post-list"  (click)="drawer.close()">Post List</mat-list-item>
     </mat-nav-list>
 
     <mat-nav-list>
-      <mat-list-item role="listitem" routerLink="/blog/post-table">Post Table</mat-list-item>
+      <mat-list-item role="listitem" routerLink="/blog/post-table" (click)="drawer.close()" >Post Table</mat-list-item>
     </mat-nav-list>
 
   </mat-drawer>
