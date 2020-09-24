@@ -30,8 +30,8 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> Actions </th>
         <td mat-cell *matCellDef="let p" class="hidden-xs-column">  
            <button mat-button [routerLink]="['/blog/post-detail', p.id]"  ><mat-icon aria-label="Post Details" svgIcon="details"></mat-icon></button>
-           <button mat-button [routerLink]="['/blog/edit-post', p.id]" *ngIf='openIdConnectService.userAvailable' ><mat-icon aria-label="Edit Post" svgIcon="edit"></mat-icon></button>
-           <button mat-button  (click)="openDeleteDialog(p)" *ngIf='openIdConnectService.userAvailable'><mat-icon aria-label="Delete Post" svgIcon="delete"></mat-icon></button>
+           <button mat-button [routerLink]="['/blog/edit-post', p.id]" *ngIf='openIdConnectService.isUser(p.author)' ><mat-icon aria-label="Edit Post" svgIcon="edit"></mat-icon></button>
+           <button mat-button  (click)="openDeleteDialog(p)" *ngIf='openIdConnectService.isUser(p.author)'><mat-icon aria-label="Delete Post" svgIcon="delete"></mat-icon></button>
          </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

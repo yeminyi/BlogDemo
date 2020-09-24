@@ -18,7 +18,12 @@ export class OpenIdConnectService {
   get userAvailable(): boolean {
     return this.currentUser != null;
   }
-
+  isUser(user:string): boolean {
+    if (this.currentUser != null)
+    return this.currentUser.profile.preferred_username == user;
+    else
+    return false;
+  }
   get user(): User {
     return this.currentUser;
   }
