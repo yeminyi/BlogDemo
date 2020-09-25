@@ -23,6 +23,7 @@ import { HandleHttpErrorInterceptor } from '../shared/handle-http-error-intercep
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostTableComponent } from './components/post-table/post-table.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { TruncatePipe } from '../shared/pipe/truncate.pipe';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     PostDetailComponent,
     SafeHtmlPipe,
     PostTableComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TruncatePipe
   ],
   providers: [
     PostService,

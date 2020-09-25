@@ -4,7 +4,7 @@
         <img class="avatar" [src]="'/avatars/' + post.author + '.jpg'" [alt]="'/avatars/' + post.author + '.jpg'" onerror="if (this.src != '/assets/default-user.png') this.src = '/assets/default-user.png';">
       </div>
       <mat-card-title [routerLink]="['/blog/post-detail', post.id]">
-        <b>{{post.title}}</b>
+        <b>{{post.title | truncate: 10 }}</b>
       </mat-card-title>
       <mat-card-subtitle>{{post.updateTime | date: 'medium'}} by {{post.author}}</mat-card-subtitle>
     </mat-card-header>

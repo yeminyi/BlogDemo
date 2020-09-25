@@ -11,6 +11,7 @@ import { RedirectSilentRenewComponent } from "./shared/oidc/redirect-silent-rene
 import { RequireAuthenticatedUserRouteGuard } from "./shared/oidc/require-authenticated-user-route.guard";
 import { GlobalErrorHandler } from './shared/global-error-handler';
 import { ErrorLoggerService } from './shared/error-logger.service';
+import { TruncatePipe } from './shared/pipe/truncate.pipe';
 
 @NgModule({
   declarations: [
