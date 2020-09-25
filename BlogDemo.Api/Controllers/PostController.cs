@@ -96,6 +96,7 @@ namespace BlogDemo.Api.Controllers
 
             return Ok(result);
         }
+        /*
         [AllowAnonymous]
         [HttpGet(Name = "GetPosts")]
         [RequestHeaderMatchingMediaType("Accept", new[] { "application/json" })]
@@ -140,6 +141,7 @@ namespace BlogDemo.Api.Controllers
 
             return Ok(postResources.ToDynamicIEnumerable(postParameters.Fields));
         }
+        */
         [AllowAnonymous]
         [HttpGet("{id}", Name = "GetPost")]
         public async Task<IActionResult> Get(int id, string fields = null)

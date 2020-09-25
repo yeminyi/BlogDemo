@@ -25,6 +25,7 @@ using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.OpenApi.Models;
 
 namespace BlogDemo.Api
 {
@@ -38,6 +39,15 @@ namespace BlogDemo.Api
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "JobRecruitment",
+                    Version = "v1"
+                });
+              
+            });
             services.AddMvc(
               options =>
               {
@@ -133,6 +143,12 @@ namespace BlogDemo.Api
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JobRecruitment v1");
+            });
 
             app.UseAuthentication();
 

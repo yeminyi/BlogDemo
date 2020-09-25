@@ -1,7 +1,7 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:50433",
       "sslPort": 44384
@@ -18,11 +18,11 @@
     "BlogDemo.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:6001/api/posts",
-      "applicationUrl": "https://localhost:6001",
+      "launchUrl": "https://localhost:6001/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:6001"
     }
   }
 }
