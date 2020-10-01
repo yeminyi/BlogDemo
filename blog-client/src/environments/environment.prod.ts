@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  apiUrlBase: '/api',
+  apiUrlBase: 'https://blogdemoapi.azurewebsites.net/api',
   urlBase: 'https://blogdemoapi.azurewebsites.net',
   openIdConnectSettings: {
     authority: 'https://blogauthserver.azurewebsites.net/',

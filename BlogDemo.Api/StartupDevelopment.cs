@@ -44,7 +44,7 @@ namespace BlogDemo.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "JobRecruitment",
+                    Title = "Blog API",
                     Version = "v1"
                 });
               
@@ -136,7 +136,7 @@ namespace BlogDemo.Api
  
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = @"../blog-client/dist";
+                configuration.RootPath = @"dist";
             });
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
