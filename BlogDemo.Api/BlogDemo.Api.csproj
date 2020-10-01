@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <SpaRoot>..\blog-client\</SpaRoot>
+    <UserSecretsId>f88cdad3-9b72-4b3c-b76a-7e62927e5b7d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
