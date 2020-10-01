@@ -26,7 +26,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.OpenApi.Models;
-
+using Serilog;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 namespace BlogDemo.Api
 {
     public class StartupDevelopment
@@ -132,7 +133,11 @@ namespace BlogDemo.Api
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
-
+ 
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = @"../blog-client/dist";
+            });
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
@@ -143,7 +148,7 @@ namespace BlogDemo.Api
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
-
+            app.UseSpaStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -153,7 +158,20 @@ namespace BlogDemo.Api
             app.UseAuthentication();
 
             app.UseMvc();
-         
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+               
+
+                  spa.Options.SourcePath = @"../blog-client";
+
+                /*
+                                if (env.IsDevelopment())
+                                {
+                                    spa.UseAngularCliServer(npmScript: "start");
+                                }*/
+            });
         }
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <SpaRoot>..\blog-client\</SpaRoot>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,5 +28,23 @@
     <ProjectReference Include="..\BlogDemo.Core\BlogDemo.Core.csproj" />
     <ProjectReference Include="..\BlogDemo.Infrastructure\BlogDemo.Infrastructure.csproj" />
   </ItemGroup>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- Include the newly-built files in the publish output -->
+    <!-- Copy the dist from the front end folder -->
+    <ItemGroup>
+      <_CopyItems Include="$(SpaRoot)dist\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_CopyItems)" DestinationFolder="dist" />
+    <!-- Include the dist from the front end folder,if in the other folder it can't include in the publish output folder  -->
+    <ItemGroup>
+      <DistFiles Include="dist\**;" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup> 
+  </Target>
 
 </Project>

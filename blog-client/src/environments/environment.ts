@@ -9,12 +9,12 @@ export const environment = {
     openIdConnectSettings: {
       authority: 'https://localhost:5001/',
       client_id: 'blog-client',
-      redirect_uri: 'http://localhost:4200/signin-oidc',
+      redirect_uri: 'http://localhost:6001/signin-oidc',
       scope: 'openid profile email restapi',
       response_type: 'id_token token',
-      post_logout_redirect_uri: 'http://localhost:4200/',
+      post_logout_redirect_uri: 'http://localhost:6001/',
       automaticSilentRenew: true,
-      silent_redirect_uri: 'http://localhost:4200/redirect-silentrenew'
+      silent_redirect_uri: 'http://localhost:6001/redirect-silentrenew'
   }
 };
 /*
