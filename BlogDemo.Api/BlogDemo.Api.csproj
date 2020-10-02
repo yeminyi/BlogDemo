@@ -40,6 +40,7 @@
     <!-- Include the dist from the front end folder,if in the other folder it can't include in the publish output folder  -->
     <ItemGroup>
       <DistFiles Include="dist\**;" />
+      <DistFiles Include="BlogDemo.db;" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
