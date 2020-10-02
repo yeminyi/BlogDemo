@@ -341,3 +341,4 @@ healthchecksdb
 
 BlogDemo.Api/logs/
 .vs
+BlogDemo.Api/dist
