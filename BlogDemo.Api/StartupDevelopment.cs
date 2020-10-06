@@ -108,7 +108,7 @@ namespace BlogDemo.Api
             });
 
             services.AddAutoMapper(typeof(StartupDevelopment));
-
+            //services.AddAutoMapper(c => c.AddProfile<MappingProfile>(), typeof(StartupDevelopment));
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostImageRepository, PostImageRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -152,7 +152,7 @@ namespace BlogDemo.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JobRecruitment v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogDemo v1");
             });
 
             app.UseAuthentication();
@@ -165,7 +165,7 @@ namespace BlogDemo.Api
                
 
                   spa.Options.SourcePath = @"../blog-client";
-
+                  spa.UseAngularCliServer(npmScript: "start");
                 /*
                                 if (env.IsDevelopment())
                                 {

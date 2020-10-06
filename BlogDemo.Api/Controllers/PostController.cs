@@ -261,7 +261,7 @@ namespace BlogDemo.Api.Controllers
         }
 
         [HttpPatch("{id}", Name = "PartiallyUpdatePost")]
-        public async Task<IActionResult> PartiallyUpdateCityForCountry(int id,
+        public async Task<IActionResult> PartiallyUpdate(int id,
             [FromBody] JsonPatchDocument<PostUpdateResource> patchDoc)
         {
             if (patchDoc == null)

@@ -68,7 +68,7 @@ namespace BlogIdp
                     ClientName = "Blog Client",
                     //ClientUri = "http://localhost:4200",
                     ClientUri =configuration["ClientAddress"],
-            AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     AccessTokenLifetime = 180,
