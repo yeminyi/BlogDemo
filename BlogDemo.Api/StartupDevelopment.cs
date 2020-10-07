@@ -27,16 +27,20 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+
 namespace BlogDemo.Api
 {
     public class StartupDevelopment
     {
         private static IConfiguration Configuration { get; set; }
+        public IHostingEnvironment Environment { get; }
 
-        public StartupDevelopment(IConfiguration configuration)
+        public StartupDevelopment(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -139,7 +143,7 @@ namespace BlogDemo.Api
                 configuration.RootPath = @"dist";
             });
         }
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment  env)
         {
             app.UseMyExceptionHandler(loggerFactory);
             
@@ -165,12 +169,12 @@ namespace BlogDemo.Api
                
 
                   spa.Options.SourcePath = @"../blog-client";
-      
-                /*
-                                if (env.IsDevelopment())
-                                {
-                                    spa.UseAngularCliServer(npmScript: "start");
-                                }*/
+
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }

@@ -1,7 +1,7 @@
 
 # Blog System
 
-Demo runs here : [https://blogdemoclient.azurewebsites.net/](https://blogdemoclient.azurewebsites.net/)
+Demo runs here : [https://blogdemo2020.azurewebsites.net/](https://blogdemoclient.azurewebsites.net/)
 
 ## Tech stack
 
@@ -76,7 +76,7 @@ Demo runs here : [https://blogdemoclient.azurewebsites.net/](https://blogdemocli
 			[
 				 {
 					"name": "APIAddress",
-					"value":"https://blogdemoapi.azurewebsites.net",
+					"value":"https://blogdemo2020.azurewebsites.net",
 					"slotSetting": true
 				 }
 			]
