@@ -171,10 +171,10 @@ namespace BlogDemo.Api
                   spa.Options.SourcePath = @"../blog-client";
 
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseAngularCliServer(npmScript: "start");
+                //}
             });
         }
     }
