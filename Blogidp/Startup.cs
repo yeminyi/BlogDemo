@@ -28,6 +28,7 @@ namespace BlogIdp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureNonBreakingSameSiteCookies();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -91,6 +92,11 @@ namespace BlogIdp
 
         public void Configure(IApplicationBuilder app)
         {
+            // Add this before any other middleware that might write cookies
+            app.UseCookiePolicy();
+
+            // This will write cookies, so make sure it's after the cookie policy
+            app.UseAuthentication();
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
