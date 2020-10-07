@@ -165,7 +165,7 @@ namespace BlogDemo.Api
                
 
                   spa.Options.SourcePath = @"../blog-client";
-                  spa.UseAngularCliServer(npmScript: "start");
+      
                 /*
                                 if (env.IsDevelopment())
                                 {
