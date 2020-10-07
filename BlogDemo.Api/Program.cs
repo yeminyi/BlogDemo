@@ -47,7 +47,7 @@ namespace BlogDemo.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 //.UseStartup<Startup>();
-                .UseStartup(typeof(StartupDevelopment).GetTypeInfo().Assembly.FullName)
+                .UseStartup(typeof(Startup).GetTypeInfo().Assembly.FullName)
                 .UseSerilog();
     }
 }

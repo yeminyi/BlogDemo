@@ -32,18 +32,19 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace BlogDemo.Api
 {
-    public class StartupDevelopment
+    public class Startup
     {
         private static IConfiguration Configuration { get; set; }
         public IHostingEnvironment Environment { get; }
 
-        public StartupDevelopment(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
             Environment = environment;
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureNonBreakingSameSiteCookies();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -111,7 +112,7 @@ namespace BlogDemo.Api
                 return new UrlHelper(actionContext);
             });
 
-            services.AddAutoMapper(typeof(StartupDevelopment));
+            services.AddAutoMapper(typeof(Startup));
             //services.AddAutoMapper(c => c.AddProfile<MappingProfile>(), typeof(StartupDevelopment));
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostImageRepository, PostImageRepository>();
@@ -145,6 +146,9 @@ namespace BlogDemo.Api
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment  env)
         {
+            // Add this before any other middleware that might write cookies
+            app.UseCookiePolicy();
+
             app.UseMyExceptionHandler(loggerFactory);
             
             app.UseCors("AllowAngularDevOrigin");
