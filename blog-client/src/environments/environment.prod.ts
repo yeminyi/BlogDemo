@@ -12,7 +12,6 @@ export const environment = {
     redirect_uri: 'https://blogdemo2020.azurewebsites.net/signin-oidc',
     scope: 'openid profile email restapi',
     response_type: 'id_token token',
-    post_logout_redirect_uri: 'https://blogdemo2020.azurewebsites.net/',
     automaticSilentRenew: true,
     silent_redirect_uri: 'https://blogdemo2020.azurewebsites.net/redirect-silentrenew'
 }
