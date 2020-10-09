@@ -44,7 +44,6 @@ namespace BlogDemo.Api
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureNonBreakingSameSiteCookies();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -146,9 +145,6 @@ namespace BlogDemo.Api
         }
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment  env)
         {
-            // Add this before any other middleware that might write cookies
-            app.UseCookiePolicy();
-
             app.UseMyExceptionHandler(loggerFactory);
             
             app.UseCors("AllowAngularDevOrigin");

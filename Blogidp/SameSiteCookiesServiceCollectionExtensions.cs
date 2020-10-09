@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -68,7 +69,18 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             }
         }
-
+        private static int GetChromeVersion(string userAgent)
+        {
+            try
+            {
+                var subStr = Convert.ToInt32(userAgent.Split("Chrome/")[1].Split('.')[0]);
+                return subStr;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// Checks if the UserAgent is known to interpret an unknown value as Strict.
         /// For those the <see cref="CookieOptions.SameSite" /> property should be
@@ -129,7 +141,12 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 return true;
             }
+            var chromeVersion = GetChromeVersion(userAgent);
 
+            if (chromeVersion >= 80)
+            {
+                return true;
+            }
             return false;
         }
     }
