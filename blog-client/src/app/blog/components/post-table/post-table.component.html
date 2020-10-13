@@ -23,8 +23,8 @@
       </ng-container>
   
       <ng-container matColumnDef="lastModified">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> Last Modified </th>
-        <td mat-cell *matCellDef="let p" class="hidden-xs-column"> {{p.lastModified}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> UpdateTime </th>
+        <td mat-cell *matCellDef="let p" class="hidden-xs-column"> {{p.updateTime| date: 'medium'}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="hidden-xs-column"> Actions </th>

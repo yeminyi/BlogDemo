@@ -9,7 +9,7 @@
   </section>
 
   <div>
-    <span class="mat-subheading-2 author">Posted @ {{post.author}} By {{post.lastModified | date: 'medium'}}</span>
+    <span class="mat-subheading-2 author">Posted By @ {{post.author}} {{post.updateTime | date: 'medium'}}</span>
     <a mat-button [routerLink]="['/blog/edit-post', post.id]" color="primary" *ngIf='openIdConnectService.isUser(post.author)'>Edit</a>
     <a mat-button color="primary"   (click)="openDeleteDialog(post)" *ngIf='openIdConnectService.isUser(post.author)'>Delete</a>
   </div>
