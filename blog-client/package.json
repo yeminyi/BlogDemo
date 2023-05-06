@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "~10.0.2",
     "@angular/router": "~10.0.2",
     "@tinymce/tinymce-angular": "^4.0.0",
-    "fast-json-patch": "^3.0.0-1",
+    "fast-json-patch": "^3.1.1",
     "ngx-infinite-scroll": "^9.0.0",
     "oidc-client": "^1.10.1",
     "rxjs": "~6.5.5",
